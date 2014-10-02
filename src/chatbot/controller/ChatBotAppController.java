@@ -39,9 +39,9 @@ public class ChatBotAppController
 
 		while(!mySillyChatBot.quitChecker(result))
 		{
+			result = mySillyChatBot.processText(result);
 			result = applicationView.showChatBotDialog(result);
 		}
-		
 		quit();
 	}
 
@@ -50,5 +50,4 @@ public class ChatBotAppController
 		applicationView.showChatBotMessage(quitMessage);
 		System.exit(0);
 	}
-
 }
