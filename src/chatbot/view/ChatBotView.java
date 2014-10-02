@@ -13,14 +13,27 @@ public class ChatBotView
 		this.baseController = baseController;
 	}
 
-	public String showChatBot(String currentInput)
+	/**
+	 * Shows a String From the ChatBot with the availability of user input.
+	 * @param currentInput The supplied String.
+	 * @return The users typed response.
+	 */
+	public String showChatBotDialog(String currentInput)
 	{
 		String result = "";
-
-		JOptionPane.showMessageDialog(null, "Hello, " + currentInput);
-		result = JOptionPane.showInputDialog(null, "are you done?");
+		
+		result = JOptionPane.showInputDialog(null, baseController.getMySillyChatBot() + " says : " + currentInput);
 
 		return result;
 	}
 
+	/**
+	 * Shows a String from the ChatBot as a popup window.
+	 * @param currentInput The string from the ChatBot.
+	 */
+	public void showChatBotMessage(String currentInput)
+	{
+		JOptionPane.showMessageDialog(null, currentInput);
+	}
+	
 }
