@@ -20,6 +20,9 @@ public class ChatBotFrame extends JFrame
 		setupFrame();
 	}
 	
+	/**
+	 * Helper method to load panel into frame, set size, and visibility.
+	 */
 	private void setupFrame()
 	{
 		this.setContentPane(basePanel);

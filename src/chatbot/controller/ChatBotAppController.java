@@ -49,8 +49,8 @@ public class ChatBotAppController
 	
 	public void start()
 	{
-		String result = applicationView.showChatBotDialog(startMessage);
-
+//		String result = applicationView.showChatBotDialog(startMessage);
+//
 //		while(!mySillyChatBot.quitChecker(result))
 //		{
 //			result = mySillyChatBot.processText(result);
