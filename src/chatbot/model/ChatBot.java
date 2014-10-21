@@ -81,11 +81,16 @@ public class ChatBot
 			{
 				result = "wow too much, take it easy";
 			}
+			else
+			{
+				
+			}
+		
 		}
 		else if(randomPosition == 1)
 		{
 			if(contentChecker(currentInput))
-			{
+			{ 
 				result = "Love that show!";
 			}
 			else
