@@ -13,6 +13,9 @@ import chatbot.view.ChatBotView;
  */
 public class ChatBotAppController
 {
+	/**
+	 * The instance of the ChatBotView, the view of the application.
+	 */
 	private ChatBotView applicationView;
 	/**
 	 * The instance of the ChatBot, the model of this application
@@ -41,7 +44,12 @@ public class ChatBotAppController
 		quitMessage = "goodbye cruel user :(";
 	}
 	
-	public ChatBot getMySillyChatBot()
+	
+ 	/**
+ 	 * Getter method for the applications ChatBot.
+ 	 * @return mySillyChatBot
+ 	 */
+ 	public ChatBot getMySillyChatBot()
 	{
 		return mySillyChatBot;
 	}
