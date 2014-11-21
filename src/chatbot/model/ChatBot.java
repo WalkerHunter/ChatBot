@@ -1,6 +1,8 @@
 package chatbot.model;
 
 import java.util.ArrayList;
+import chatbot.model.ChatBotUser;
+
 
 /**
  * the ChatBot model class. Used for checking and manipulating strings.
@@ -12,12 +14,14 @@ public class ChatBot
 	private ArrayList<String> memeList;
 	private String name;
 	private int chatCount;
-
+	private ChatBotUser myUser;
+	
 	public ChatBot(String name)
 	{
 		memeList = new ArrayList<String>();
 		this.name = name;
 		chatCount = 0;
+		myUser = new ChatBotUser();
 		fillTheMemeList();
 	}
 
@@ -26,6 +30,16 @@ public class ChatBot
 	 * @param name The new name for the ChatBot.
 	 */
 	
+	public ChatBotUser getMyUser()
+	{
+		return myUser;
+	}
+
+	public void setMyUser(ChatBotUser myUser)
+	{
+		this.myUser = myUser;
+	}
+ 
 	/**
 	 * Gets the name of the person
 	 * @return The name of the ChatBot object
@@ -69,11 +83,18 @@ public class ChatBot
 	 * @return The processed text based on checker or other methods.
 	 */
 	
-	public String processText(String currentInput)
+	public String processText (String currentInput)
+	
 	{
 		String result = "";
 		
-		int randomPosition = (int) (Math.random() * 3);
+		
+		if(getChatCount() < 7)
+		{
+
+		}
+		
+		int randomPosition = (int) (Math.random() * 4);
 		
 		if(randomPosition == 0)
 		{
@@ -98,7 +119,7 @@ public class ChatBot
 				result = "meh, okay.";
 			}
 		}
-		else
+		else if( randomPosition == 2)
 		{
 			if(memeChecker(currentInput))
 			{
@@ -109,8 +130,12 @@ public class ChatBot
 				result = "not a meme, try again";
 			}
 		}
+		else
+		{
+			
+		}
 		
-		
+		updateChatCount();
 		return result;
 	}
 
