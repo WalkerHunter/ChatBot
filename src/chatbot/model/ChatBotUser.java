@@ -10,6 +10,7 @@ public class ChatBotUser
 	private int age;
 	private boolean hasTattoos;
 	private boolean needsCorrectiveLenses;
+	private double userWeight;
 	
 	public ChatBotUser()
 	{
@@ -17,6 +18,7 @@ public class ChatBotUser
 		this.age = -999;
 		this.hasTattoos = false;
 		this.needsCorrectiveLenses = false;
+		this.userWeight = -999;
 		
 	}
 
@@ -58,6 +60,12 @@ public class ChatBotUser
 	public void setNeedsCorrectiveLenses(boolean needsCorrectiveLenses)
 	{
 		this.needsCorrectiveLenses = needsCorrectiveLenses;
+	}
+
+	public double setWeight(double userWeight)
+	{
+		return userWeight;
+		
 	}
 	
 }
