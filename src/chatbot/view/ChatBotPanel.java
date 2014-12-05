@@ -3,6 +3,8 @@ package chatbot.view;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.AdjustmentEvent;
+import java.awt.event.AdjustmentListener;
 import java.awt.event.KeyEvent;
 
 import javax.swing.JPanel;
@@ -14,6 +16,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
+
 import java.awt.event.KeyAdapter;
 
 /**
@@ -39,12 +42,12 @@ public class ChatBotPanel extends JPanel
 	{
 		this.baseController = baseController;
 
-		firstButton = new JButton("click the button... it is so slicky :D");
+		firstButton = new JButton("SEND");
 		firstTextField = new JTextField(25);
-		
 		baseLayout = new SpringLayout();
 		chatArea = new JTextArea(5, 20);
 		chatPane = new JScrollPane();
+		
 		setupPane();
 		setupPanel();
 		setupLayout();
@@ -55,6 +58,7 @@ public class ChatBotPanel extends JPanel
 	{
 		chatArea.setLineWrap(true);
 		chatArea.setWrapStyleWord(true);
+		chatArea.setEditable(false);
 	}
 
 	/**
@@ -102,7 +106,7 @@ public class ChatBotPanel extends JPanel
 				chatArea.append("\n" + (firstTextField.getText()));
 				String currentInput = firstTextField.getText();
 				String result = baseController.getChatBotDialog(currentInput);
-				showTextMessage(currentInput);
+				//showTextMessage(currentInput);
 				showTextMessage(result);
 				firstTextField.setText("");
 			}
@@ -117,8 +121,20 @@ public class ChatBotPanel extends JPanel
 				if (event.getKeyCode() == KeyEvent.VK_ENTER)
 				{
 					chatArea.append("\n" + (firstTextField.getText()));
+					String currentInput = firstTextField.getText();
+					String result = baseController.getChatBotDialog(currentInput);
+					//showTextMessage(currentInput);
+					showTextMessage(result);
 					firstTextField.setText("");
 				}
+			}
+		});
+		
+		chatPane.getVerticalScrollBar().addAdjustmentListener(new AdjustmentListener()
+		{
+			public void adjustmentValueChanged(AdjustmentEvent e)
+			{
+				chatArea.select(chatArea.getCaretPosition()*12 ,chatArea.getText().length());
 			}
 		});
 	

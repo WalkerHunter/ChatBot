@@ -42,7 +42,7 @@ public class ChatBotUser
 		this.age = age;
 	}
 
-	public boolean isHasTattoos()
+	public boolean hasTattoos()
 	{
 		return hasTattoos;
 	}
@@ -67,5 +67,7 @@ public class ChatBotUser
 		return userWeight;
 		
 	}
+
+
 	
 }

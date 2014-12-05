@@ -1,6 +1,7 @@
 package chatbot.model;
 
 import java.util.ArrayList;
+
 import chatbot.model.ChatBotUser;
 
 
@@ -21,7 +22,9 @@ public class ChatBot
 	public ChatBot(String name)
 	{
 		memeList = new ArrayList<String>();
+		userInputList = new ArrayList<String>();
 		this.name = name;
+		contentArea = "";
 		chatCount = 0;
 		myUser = new ChatBotUser();
 		fillTheMemeList();
@@ -101,11 +104,13 @@ public class ChatBot
 		}
 		else
 		{
-			result = "use words!!!!";
+			result = "SPEAK!";
 			chatCount--;
 		}
 		updateChatCount();
 		return result;
+		
+	}
 		
 		
 		private String introduceUser(String input)
@@ -115,35 +120,36 @@ public class ChatBot
 			if (getChatCount() == 0)
 			{
 				myUser.setUserName(input);
-				userQuestion = "Good name " + myUser.getUserName() + " how old are you?";
+				userQuestion = "Awesome name " + myUser.getUserName() + " how old are you?";
 			}
 			else if (getChatCount() == 1)
 			{
 				int userAge = Integer.parseInt(input);
 				myUser.setAge(userAge);
-				userQuestion = "Garsh, you are really old " + myUser.getUserName() + " how much do you weigh?";
+				userQuestion = "You're a youngen aren't ya, " + myUser.getUserName() + "? how much do you weigh?";
 			}
 			else if (getChatCount() == 2)
 			{
 				double userWeight = Double.parseDouble(input);
 				myUser.setWeight(userWeight);
-				userQuestion = "Yikes that is a lot less than a dwarf star " + myUser.getUserName() + " do you have tattoos?";
+				userQuestion = "Not bad.." + myUser.getUserName() + " do you have tattoos?";
 			}
 			else if (getChatCount() == 3)
 			{
 				boolean userTatts = Boolean.parseBoolean(input);
 				myUser.setHasTattoos(userTatts);
-				userQuestion = "Some comment about tattoos" + myUser.getUserName() + " do you have corrective lenses?";
+				userQuestion = "I dont have any.." + myUser.getUserName() + " do you have frekles?";
 			}
 			else
 			{
 				boolean userLenses = Boolean.parseBoolean(input);
 				myUser.setNeedsCorrectiveLenses(userLenses);
-				userQuestion = "I love my glasses :D " + myUser.getUserName() + " What do you want to talk about????????";
+				userQuestion = "I love my frekles! " + myUser.getUserName() + " what should we talk about?";
 			}
 
 			return userQuestion;
 		}
+		
 		
 		private String randomChatConversation(String input)
 		{
@@ -152,35 +158,35 @@ public class ChatBot
 			int randomPosition = (int) (Math.random() * 7);
 			if (randomPosition == 0)
 			{
-				if (stringLengthChecker(input))
+				if (stringChecker(input))
 				{
-					conversation = "too long";
+					conversation = "too much!";
 				}
 				else
 				{
-					conversation = "short words";
+					conversation = "a little more words..";
 				}
 			}
 			else if (randomPosition == 1)
 			{
 				if (contentChecker(input))
 				{
-					conversation = "yup you know the secret";
+					conversation = "OMG YOU KNOW?!";
 				}
 				else
 				{
-					conversation = "try again another time";
+					conversation = "YOU SHOULD KNOW";
 				}
 			}
 			else if (randomPosition == 2)
 			{
 				if (memeChecker(input))
 				{
-					conversation = "Wow, " + input + " is a meme. Wahoo!";
+					conversation = "Wow, " + input + " is a meme. COOOL!";
 				}
 				else
 				{
-					conversation = "not a meme, try again";
+					conversation = "That wasn't a meme, sad day..";
 				}
 			}
 			else if (randomPosition == 3)
@@ -191,17 +197,17 @@ public class ChatBot
 			{
 				// add to our list
 				userInputList.add(input);
-				conversation = "Thank you for the comment";
+				conversation = "Your commment is appreticated.";
 			}
 			else if (randomPosition == 5)
 			{
 				if (mashChecker(input))
 				{
-					conversation = mashingDetected(input);
+					conversation = mashingDeteced(input);
 				}
 				else
 				{
-					conversation = noMashingDetected(input);
+					conversation = noMashingDeteced(input);
 				}
 			}
 			else
@@ -219,6 +225,7 @@ public class ChatBot
 			return conversation;
 		}
 		
+
 		private String userTopic(String userInput)
 		{
 			String userBasedResponse = "";
@@ -228,79 +235,41 @@ public class ChatBot
 			switch (randomUserTopic)
 			{
 			case 1:
-				userBasedResponse = myUser.hasTattoos() + " is the response to tattoos :D";
+				userBasedResponse = myUser.hasTattoos() + " them tattoooos";
 				break;
 			case 0:
-				userBasedResponse = myUser.getUserName() + " is a silly name :P";
+				userBasedResponse = myUser.getUserName() + " is a intreging name";
 				break;
 			default:
-				userBasedResponse = myUser.getAge() + " is realllly reallllllly old";
+				userBasedResponse = myUser.getAge() + " is too old, sorry";
 				break;
 			}
 
 			return userBasedResponse;
 		}
 		
-		int randomPosition = (int) (Math.random() * 4);
 		
-		if(randomPosition == 0)
+		private boolean userInputChecker(String userInput)
 		{
-			if(stringChecker(currentInput))
+			boolean matchesInput = false;
+
+			for (int loopCount = 0; loopCount < userInputList.size(); loopCount++)
 			{
-				result = "wow too much, take it easy";
+				if (userInput.equalsIgnoreCase(userInputList.get(loopCount)))
+				{
+					matchesInput = true;
+					userInputList.remove(loopCount);
+					loopCount--;
+				}
 			}
-			else
-			{
-				
-			}
+
+			return matchesInput;
+		}
 		
-		}
-		else if(randomPosition == 1)
+		private void updateChatCount()
 		{
-			if(contentChecker(currentInput))
-			{ 
-				result = "Love that show!";
-			}
-			else
-			{
-				result = "meh, okay.";
-			}
+			chatCount++;
 		}
-		else if( randomPosition == 2)
-		{
-			if(memeChecker(currentInput))
-			{
-				result = "wow, " + currentInput + " is a meme. Wahoo!";
-			}
-			else
-			{
-				result = "not a meme, try again";
-			}
-		}
-		else if( randomPosition == 3)
-		{
-			if(mashChecker(currentInput))
-			{
-				result = "Stop mashing, its not good for the keyboard";
-			}
-			
-		}
-		else
-		{
-			
-		}
-		updateChatCount();
-		return result;
-	}
-
-	/**
-	 * Private helper method to update the chat count variable.
-	 */
-	private void updateChatCount()
-	{
-		chatCount++;
-	}
-
 	/**
 	 * Private helper method to check meme's
 	 * @param input Meme's
@@ -338,7 +307,7 @@ public class ChatBot
 	{
 		boolean okToQuit = false;
 		
-		if(input != null && input.equalsIgnoreCase("yes"))
+		if(input != null && input.equalsIgnoreCase("quit"))
 		{
 			okToQuit = true;
 		}
@@ -405,7 +374,7 @@ public class ChatBot
 	{
 		boolean isMashing= false;
 		
-		if(userInput.indexOf("sdf") > -1);
+		if(userInput.indexOf("asd") > -1);
 		{
 			isMashing = true;
 		}
